@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.TestUtilities;
 import com.example.entities.Message;
 import com.example.services.MessageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,18 +36,19 @@ class MessageControllerFullSpringMvcTest {
 
     @Test
     void testServiceCalledFor_getAllMessages() throws Exception {
-        ArrayList<Message> messages = getMessageList();
+        ArrayList<Message> messages = TestUtilities.getMessageList();
 
         when(mockMessageService.findAll()).thenReturn(messages);
 
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/messages")
-                .accept("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/messages");
 //  Browser               .accept("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
 
+        // We can do checks on the ResultActions object
         ResultActions resultActions = mockMvc.perform(requestBuilder);
         resultActions.andExpect(status().isOk());
         resultActions.andExpect(content().string("[{\"id\":null,\"content\":\"message1\"},{\"id\":null,\"content\":\"message2\"}]"));
 
+        // We can also creqte an MvcResult object to pick apart
         MvcResult result = resultActions.andReturn();
 
         String contentAsString = result.getResponse().getContentAsString();
@@ -54,14 +56,8 @@ class MessageControllerFullSpringMvcTest {
         Message[] messageArray = mapper.readValue(contentAsString, Message[].class);
         assertEquals(messages.size(), messageArray.length);
 
-
         verify(mockMessageService, times(1)).findAll();
     }
 
-    private static ArrayList<Message> getMessageList() {
-        ArrayList<Message> messages = new ArrayList<>();
-        messages.add( new Message("message1"));
-        messages.add( new Message("message2"));
-        return messages;
-    }
+
 }

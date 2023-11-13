@@ -13,7 +13,7 @@ class MessageControllerNoSpringTest {
         MessageService mockMessageService = mock(MessageService.class);
         MessageController messageController = new MessageController(mockMessageService);
 
-        Iterable<Message> messages = messageController.getAllMessages();
+        messageController.getAllMessages();
 
         verify(mockMessageService, times(1)).findAll();
     }
