@@ -10,6 +10,7 @@ public class Message {
     @Id
     @GeneratedValue
     private Long id;
+
     private String content;
 
     public Message(String content) {this.content = content;}
