@@ -22,6 +22,7 @@ public class MessageControllerSomeSpringTest {
     @Test
     public void getObjectsFromContextAndTestBehavior() {
         Iterable<Message> messages = messageController.getAllMessages();
+
         verify(mockMessageService, times(1)).findAll();
     }
 }
