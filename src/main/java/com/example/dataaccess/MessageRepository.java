@@ -2,6 +2,7 @@ package com.example.dataaccess;
 
 import com.example.entities.Message;
 import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MessageRepository extends ListCrudRepository<Message, Long> {
-}
+@Repository
+public interface MessageRepository extends ListCrudRepository<Message, Long> { }
