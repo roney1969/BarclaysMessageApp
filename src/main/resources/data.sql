@@ -1,1 +1,0 @@
--- insert into message (id, content) values(100, 'this is a message');
