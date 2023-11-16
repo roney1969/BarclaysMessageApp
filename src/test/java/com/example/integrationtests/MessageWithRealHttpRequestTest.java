@@ -40,6 +40,5 @@ public class MessageWithRealHttpRequestTest {
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
         System.out.println(messageId);
-
     }
 }

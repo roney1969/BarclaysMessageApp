@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.entities.Message;
 import com.example.services.MessageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -28,14 +29,10 @@ class MessageControllerNoSpringTest {
 
     @Test
     void testGetMessageById()  {
-        long messageId = 1L;
-
-        try {
-            this.messageController.getMessageById(messageId);
-        } catch (ResponseStatusException rse) {
-            // We shouldn't have  a record there, it doesn't matter, we're testing behavior below
-            System.out.println("Expected exception thrown;");
-        }
+        long messageId = 1;
+        // if our service returns null, the controller method will explode with a ResponseStatusException
+        when(this.mockMessageService.getMessageById(messageId)).thenReturn(new Message("howdy, partner"));
+        this.messageController.getMessageById(messageId);
 
         verify(this.mockMessageService, times(1)).getMessageById(messageId);
     }
