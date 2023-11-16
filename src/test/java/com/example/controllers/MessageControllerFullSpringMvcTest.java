@@ -56,5 +56,28 @@ class MessageControllerFullSpringMvcTest {
         verify(mockMessageService, times(1)).findAll();
     }
 
+    @Test
+    void testGetMessageById() throws Exception {
+        long messageId = 1L;
+
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/messages/" + Long.toString(messageId));
+        MvcResult result = mockMvc.perform(requestBuilder)
+                .andExpect(status().isOk())
+                .andReturn();
+
+        verify(mockMessageService, times(1)).getMessageById(messageId);
+    }
+
+    @Test
+    void testGetMessageByIdBadIndex() throws Exception {
+        long messageId = 0;
+
+        MockHttpServletRequestBuilder requestBuilder =
+                MockMvcRequestBuilders.get("/messages/" + messageId);
+        MvcResult result = mockMvc.perform(requestBuilder)
+                .andExpect(status().isNotFound())
+                .andReturn();
+    }
+
 
 }

@@ -6,8 +6,11 @@ import com.example.entities.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -36,4 +39,31 @@ class MessageServiceNoSpringTest {
 
         verify(mockRepo, times(1)).findAll();
     }
+
+    @Test
+    void testGetMessageByIdOptionalEmpty() {
+        long messageId = 1;
+        Optional<Message> optionalMessage = Optional.empty();
+        when(this.mockRepo.findById(messageId)).thenReturn(optionalMessage);
+        Message actual = messageService.getMessageById(messageId);
+        Assertions.assertNull(actual);
+    }
+
+    @Test
+    void testGetMessageByIdOptionalNotEmpty() {
+        Message message = new Message("Howdy");
+
+        when(this.mockRepo.findById(any())).thenReturn(Optional.of(message));
+
+        Message actual = messageService.getMessageById(1L);
+
+        verify(mockRepo, times(1)).findById(any());
+        Assertions.assertEquals(message.getContent(), actual.getContent());
+        Assertions.assertEquals(message.getId(), actual.getId());
+    }
+
+    @Test
+    void testGetMessageByIdBadRequest() {
+    }
+
 }

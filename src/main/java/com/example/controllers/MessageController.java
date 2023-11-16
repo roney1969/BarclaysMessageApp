@@ -3,9 +3,11 @@ package com.example.controllers;
 import com.example.entities.Message;
 import com.example.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class MessageController {
@@ -20,5 +22,14 @@ public class MessageController {
     @GetMapping("/messages")
     public Iterable<Message> getAllMessages() {
         return messageService.findAll();
+    }
+
+    @GetMapping("/messages/{messageId}")
+    public Message getMessageById(@PathVariable long messageId) {
+        Message  message = messageService.getMessageById(messageId);
+        if(message == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Message not found");
+
+        return message;
     }
 }

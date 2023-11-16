@@ -31,4 +31,15 @@ public class MessageWithRealHttpRequestTest {
         assertEquals("Third test message", messages[2].getContent());
         assertEquals("Fourth test message", messages[3].getContent());
     }
+
+    @Test
+    @Disabled
+    public void testGetMessageById() throws IOException {
+        Long messageId = 1L;
+        HttpUriRequest request = new HttpGet("http://localhost:8080/messages/" + messageId);
+        HttpResponse response = HttpClientBuilder.create().build().execute(request);
+
+        System.out.println(messageId);
+
+    }
 }
