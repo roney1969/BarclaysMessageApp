@@ -28,8 +28,14 @@ class MessageControllerNoSpringTest {
 
     @Test
     void testGetMessageById()  {
-        Long messageId = 1L;
-        this.messageController.getMessageById(messageId);
+        long messageId = 1L;
+
+        try {
+            this.messageController.getMessageById(messageId);
+        } catch (ResponseStatusException rse) {
+            // We shouldn't have  a record there, it doesn't matter, we're testing behavior below
+            System.out.println("Expected exception thrown;");
+        }
 
         verify(this.mockMessageService, times(1)).getMessageById(messageId);
     }

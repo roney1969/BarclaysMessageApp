@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MessageController.class)
+@WebMvcTest
 class MessageControllerFullSpringMvcTest {
 
     @MockBean
@@ -32,7 +32,7 @@ class MessageControllerFullSpringMvcTest {
     ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    void testServiceCalledFor_getAllMessages() throws Exception {
+    void testGetAllMessages() throws Exception {
         ArrayList<Message> messages = TestUtilities.getMessageList();
         String expectedJson = mapper.writeValueAsString(messages);
 
@@ -58,8 +58,10 @@ class MessageControllerFullSpringMvcTest {
 
     @Test
     void testGetMessageById() throws Exception {
-        long messageId = 1L;
+        long messageId = 1;
 
+        Message message = new Message("Howdy, I'm message 1");
+        when(mockMessageService.getMessageById(messageId)).thenReturn(message);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/messages/" + Long.toString(messageId));
         MvcResult result = mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
