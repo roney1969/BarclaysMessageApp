@@ -16,8 +16,8 @@ public class Person {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy =  "sender")
-    private List<Message> sentMessages;
+//    @OneToMany(mappedBy =  "sender")
+//    private List<Message> sentMessages;
 
     private String name;
     private String email;
@@ -34,9 +34,6 @@ public class Person {
         return id;
     }
 
-    public List<Message> getSentMessages() {
-        return sentMessages;
-    }
 
     public String getName() {
         return name;
@@ -48,9 +45,12 @@ public class Person {
 
     public Person()  {}
 
+//    public List<Message> getSentMessages() {
+//        return sentMessages;
+//    }
     public Person(String name, String email) {
         this.name = name;
         this.email = email;
-        sentMessages = new ArrayList<>();
+//        sentMessages = new ArrayList<>();
     }
 }

@@ -19,10 +19,13 @@ public class Populator {
         this.personRepository = personRepository;
     }
 
-    @EventListener(ContextRefreshedEvent.class)
+//    @EventListener(ContextRefreshedEvent.class)
     public void populate() {
         Person bill = new Person("Bill", "bill@iscooler.com");
         bill = personRepository.save(bill);
+
+        Person dave = new Person("Dave", "dave@dave.com");
+        personRepository.save(dave);
 
         Message message = new Message("This is a message", bill);
         this.messageRepository.save(message);

@@ -11,8 +11,7 @@ public class BarclayMessageApplication {
 
 		ApplicationContext context = SpringApplication.run(BarclayMessageApplication.class, args);
 
-//		Populator populator = context.getBean(Populator.class);
-//		populator.populate();
+		Populator populator = context.getBean(Populator.class);
+		populator.populate();
 	}
-
 }
