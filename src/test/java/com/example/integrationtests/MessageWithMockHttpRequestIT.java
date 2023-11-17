@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 public class MessageWithMockHttpRequestIT {
 
+    private final ObjectMapper mapper = new ObjectMapper();
     @Autowired
     MockMvc mockMvc;
 
@@ -42,7 +43,6 @@ public class MessageWithMockHttpRequestIT {
                         .andReturn();
 
         String contentAsJson = result.getResponse().getContentAsString();
-        ObjectMapper mapper = new ObjectMapper();
 
         Message[] messages = mapper.readValue(contentAsJson, Message[].class);
 
@@ -50,6 +50,24 @@ public class MessageWithMockHttpRequestIT {
         assertEquals("Second test message", messages[1].getContent());
         assertEquals("Third test message", messages[2].getContent());
         assertEquals("Fourth test message", messages[3].getContent());
+    }
+    @Test
+    public void testFindMessagesBySenderEmail() throws Exception {
+        String senderEmail = "bill@iscooler.com";
+        MvcResult result =
+                this.mockMvc.perform(MockMvcRequestBuilders.get("/messages/sender/email/" + senderEmail))
+                        .andExpect(status().isOk())
+                        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                        .andReturn();
+        String contentAsJson = result.getResponse().getContentAsString();
+
+        Message[] messages = mapper.readValue(contentAsJson, Message[].class);
+
+        assertEquals(3, messages.length);
+
+        assertEquals("First test message", messages[0].getContent());
+        assertEquals("Second test message", messages[1].getContent());
+        assertEquals("Third test message", messages[2].getContent());
     }
 
 }

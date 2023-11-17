@@ -9,48 +9,30 @@ import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class Person {
 
     @Id
     @GeneratedValue
     private Long id;
+    public Long getId() {return id;}
 
-//    @OneToMany(mappedBy =  "sender")
-//    private List<Message> sentMessages;
+    @OneToMany(mappedBy =  "sender")
+    private List<Message> sentMessages = new ArrayList<>();
 
     private String name;
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
+
     private String email;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() {return email;}
+    public void setEmail(String email) {this.email = email;}
 
     public Person()  {}
 
-//    public List<Message> getSentMessages() {
-//        return sentMessages;
-//    }
     public Person(String name, String email) {
         this.name = name;
         this.email = email;
-//        sentMessages = new ArrayList<>();
     }
 }

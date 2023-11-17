@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class BarclayMessageApplication {
 	public static void main(String[] args) {
-
 		ApplicationContext context = SpringApplication.run(BarclayMessageApplication.class, args);
 
 		Populator populator = context.getBean(Populator.class);

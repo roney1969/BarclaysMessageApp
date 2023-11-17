@@ -32,6 +32,8 @@ public class MessageService {
         return message.orElse(null);
     }
 
-    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
-    void teaPot() {}
+
+    public List<Message> getMessagesBySenderEmail(String email) {
+        return messageRepository.findMessagesBySenderEmail(email);
+    }
 }
