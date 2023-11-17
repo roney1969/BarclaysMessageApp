@@ -32,7 +32,6 @@ public class MessageService {
         return message.orElse(null);
     }
 
-
     public List<Message> getMessagesBySenderEmail(String email) {
         return messageRepository.findMessagesBySenderEmail(email);
     }

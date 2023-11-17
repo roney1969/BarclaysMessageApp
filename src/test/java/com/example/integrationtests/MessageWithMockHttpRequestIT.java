@@ -66,6 +66,7 @@ public class MessageWithMockHttpRequestIT {
         assertEquals(3, messages.length);
 
         assertEquals("First test message", messages[0].getContent());
+        assertEquals(1000, messages[0].getId());
         assertEquals("Second test message", messages[1].getContent());
         assertEquals("Third test message", messages[2].getContent());
     }

@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends ListCrudRepository<Message, Long> {
     List<Message> findMessagesBySenderEmail(String email);
+    List<Message> findMessagesBySenderName(String name);
 }
