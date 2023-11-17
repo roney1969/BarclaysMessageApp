@@ -42,7 +42,7 @@ class MessageControllerNoSpringTest {
         when(this.mockMessageService.getMessageById(0)).thenReturn(null);
 
         assertThrows(ResponseStatusException.class, () -> {
-            this.messageController.getMessageById(0);
+            this.messageController.getMessageById(0L);
         });
     }
 

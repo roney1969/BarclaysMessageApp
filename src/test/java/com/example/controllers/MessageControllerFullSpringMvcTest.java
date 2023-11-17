@@ -62,7 +62,7 @@ class MessageControllerFullSpringMvcTest {
 
         Message message = new Message("Howdy, I'm message 1");
         when(mockMessageService.getMessageById(messageId)).thenReturn(message);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/messages/" + Long.toString(messageId));
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/messages/" + messageId);
         MvcResult result = mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andReturn();
