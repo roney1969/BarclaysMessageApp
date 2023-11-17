@@ -15,7 +15,6 @@ public class MessageController {
 
     MessageService messageService;
 
-
     @Autowired
     public MessageController(MessageService messageService) {
         this.messageService = messageService;
@@ -40,7 +39,7 @@ public class MessageController {
         //Note: here we're returning an empty string in two cases
         // 1. If the sender (person) has no associated methods
         // 2. If we don't even know about that sender email address (i.e. no corresponding person)
-        // Is this what you want?
+        // Is this what we want?  What are the other options?
         return  messageService.getMessagesBySenderEmail(email);
     }
 
