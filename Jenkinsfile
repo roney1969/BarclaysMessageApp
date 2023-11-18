@@ -24,19 +24,18 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('sonarqube') {
-//                        sh "${tool('sonar-scanner')}/bin/sonar-scanner -Dsonar.projectKey=${sonar_project} -Dsonar.projectName=${sonar_project}"
                         sh 'mvn sonar:sonar -Pcoverage'
                     }
                 }
             }
         }
-//        stage("Quality Gate") {
-//            steps {
-//              timeout(time: 1, unit: 'HOURS') {
-//                waitForQualityGate abortPipeline: true
-//              }
-//            }
-//          }
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
         stage('Deploy') {
             steps {
                 sh './jenkins/scripts/deploy.sh'
