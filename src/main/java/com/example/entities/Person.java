@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -18,8 +19,8 @@ public class Person {
     private Long id;
     public Long getId() {return id;}
 
-    @OneToMany(mappedBy =  "sender")
-    private List<Message> sentMessages = new ArrayList<>();
+//    @OneToMany(mappedBy =  "sender")
+//    private HashSet<Message> sentMessages;
 
     private String name;
     public String getName() {return name;}
