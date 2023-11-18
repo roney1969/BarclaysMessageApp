@@ -45,7 +45,7 @@ public class MessageController {
 
     @GetMapping("/sender/name/{name}")
     public List<Message> getMessagesBySenderName(@PathVariable String name){
-        return  null;
+        return  null;   //TODO implement, Future Dave
     }
 
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)

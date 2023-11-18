@@ -18,7 +18,7 @@ public class MessageWithRealHttpRequestTest {
 
     ObjectMapper mapper = new ObjectMapper();
 
-    @Disabled
+    @Disabled("Must be run while application is running.")
     @Test
     public void testGettingAllMessages() throws IOException {
         HttpUriRequest request = new HttpGet("http://localhost:8080/messages");
