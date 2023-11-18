@@ -25,7 +25,7 @@ pipeline {
                 script {
                     withSonarQubeEnv('sonarqube') {
 //                        sh "${tool('sonar-scanner')}/bin/sonar-scanner -Dsonar.projectKey=${sonar_project} -Dsonar.projectName=${sonar_project}"
-                        sh 'mvn clean package sonar:sonar -Pcoverage'
+                        sh 'mvn sonar:sonar -Pcoverage'
                     }
                 }
             }
