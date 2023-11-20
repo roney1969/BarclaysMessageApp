@@ -20,7 +20,7 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public Iterable<Message> getAllMessages() {
         return messageService.findAll();
     }

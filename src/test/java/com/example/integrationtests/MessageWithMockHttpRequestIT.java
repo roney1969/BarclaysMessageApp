@@ -21,9 +21,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //Note: test class name regex '[A-Z][A-Za-z\d]*Test(s|Case)?|Test[A-Z][A-Za-z\d]*|IT(.*)|(.*)IT(Case)?'
 //Note: class names nouns, method names verbs, collections plural
-@Sql("classpath:test-data.sql")
 @SpringBootTest
 @AutoConfigureMockMvc
+@Sql("classpath:test-data.sql")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
 public class MessageWithMockHttpRequestIT {

@@ -25,6 +25,9 @@ public class Populator {
         Person dave = new Person("Dave", "dave@dave.com");
         personRepository.save(dave);
 
+        Person futureDave = new Person("Dave", "dave@dave.com");
+        personRepository.save(futureDave);
+
         Message message = new Message("This is a message", bill);
         this.messageRepository.save(message);
 

@@ -2,9 +2,10 @@ package com.example.services;
 
 import com.example.dataaccess.PersonRepository;
 import com.example.entities.Person;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -17,8 +18,12 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public Person addPerson(@RequestBody Person person) {
-        throw new RuntimeException("Not implemented yet"); //TODO fix this, Future Dave
+    public Person addPerson(Person person) {
+
+        if(person.getId() != null && person.getId() != 0)
+            throw  new IllegalArgumentException("The id provided for a create/post must be null or zero.");
+
+        return this.personRepository.save(person);
     }
 
     public List<Person> findAll() {
