@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.entities.Message;
+import com.example.entities.Person;
 import com.example.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +58,13 @@ public class MessageController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Message addMessage(@RequestBody Message message) {
-        return null; //TODO
+        Message newMessage;
+
+        try {
+            newMessage = this.messageService.addMessage(message);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+        return newMessage;
     }
 }

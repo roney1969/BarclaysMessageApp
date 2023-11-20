@@ -2,6 +2,7 @@ package com.example.services;
 
 import com.example.TestUtilities;
 import com.example.dataaccess.MessageRepository;
+import com.example.dataaccess.PersonRepository;
 import com.example.entities.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,12 +15,14 @@ import static org.mockito.Mockito.*;
 
 class MessageServiceNoSpringTest {
     MessageRepository mockRepo;
+    PersonRepository mockPersonRepository;
     MessageService messageService;
 
     @BeforeEach
     void beforeEach() {
         this.mockRepo = mock(MessageRepository.class);
-        this.messageService = new MessageService(this.mockRepo);
+        this.mockPersonRepository = mock(PersonRepository.class);
+        this.messageService = new MessageService(this.mockRepo, this.mockPersonRepository);
     }
 
     @Test
