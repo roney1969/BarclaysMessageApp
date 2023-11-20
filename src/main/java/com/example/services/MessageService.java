@@ -3,14 +3,10 @@ package com.example.services;
 import com.example.dataaccess.MessageRepository;
 import com.example.entities.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class MessageService {

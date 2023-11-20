@@ -3,7 +3,6 @@ package com.example.controllers;
 import com.example.entities.Message;
 import com.example.services.MessageService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 

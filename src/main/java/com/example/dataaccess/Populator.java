@@ -3,8 +3,6 @@ package com.example.dataaccess;
 import com.example.entities.Message;
 import com.example.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
