@@ -40,9 +40,7 @@ class MessageControllerNoSpringTest {
     void testGetMessageByIdBadRequest() {
         when(this.mockMessageService.getMessageById(0)).thenReturn(null);
 
-        assertThrows(ResponseStatusException.class, () -> {
-            this.messageController.getMessageById(0L);
-        });
+        assertThrows(ResponseStatusException.class, () -> this.messageController.getMessageById(0L));
     }
 
 }

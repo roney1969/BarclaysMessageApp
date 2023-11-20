@@ -13,6 +13,7 @@ public class TestUtilities {
         return messages;
     }
 
+    @SuppressWarnings("unused")
     public static <T> long getSize(Iterable<T> iterable) {
         return StreamSupport.stream(iterable.spliterator(), false).count();
     }

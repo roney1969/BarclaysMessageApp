@@ -59,9 +59,4 @@ class MessageServiceNoSpringTest {
         Assertions.assertEquals(message.getContent(), actual.getContent());
         Assertions.assertEquals(message.getId(), actual.getId());
     }
-
-    @Test
-    void testGetMessageByIdBadRequest() {
-    }
-
 }

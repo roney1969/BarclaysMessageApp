@@ -13,7 +13,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
@@ -35,6 +34,7 @@ class PersonServiceSomeTest {
     @Test
     void addPersonHappyPath() {
         when(mockPersonRepository.save(TestConstants.BILL)).thenReturn(TestConstants.BILL);
+        //noinspection DataFlowIssue
         when(mockPersonRepository.existsById(null)).thenThrow(new InvalidDataAccessApiUsageException("The given id must not be null"));
 
         Person actual = this.personService.addPerson(TestConstants.BILL);
@@ -47,9 +47,7 @@ class PersonServiceSomeTest {
         Person personWithIdNumber = mapper.readValue(json, Person.class);
 
         assertThrows(IllegalArgumentException.class,
-                () -> {
-                    this.personService.addPerson(personWithIdNumber);
-                });
+                () -> this.personService.addPerson(personWithIdNumber));
     }
 
     @Test

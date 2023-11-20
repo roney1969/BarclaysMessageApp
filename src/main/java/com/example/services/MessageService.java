@@ -31,4 +31,8 @@ public class MessageService {
     public List<Message> getMessagesBySenderEmail(String email) {
         return messageRepository.findMessagesBySenderEmail(email);
     }
+
+    public List<Message> getMessagesBySenderName(String name) {
+        return this.messageRepository.findMessagesBySenderName(name);
+    }
 }

@@ -14,6 +14,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+@SuppressWarnings("resource")
 public class MessageWithRealHttpRequestTest {
 
     ObjectMapper mapper = new ObjectMapper();

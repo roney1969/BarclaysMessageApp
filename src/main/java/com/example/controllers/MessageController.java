@@ -45,12 +45,18 @@ public class MessageController {
 
     @GetMapping("/sender/name/{name}")
     public List<Message> getMessagesBySenderName(@PathVariable String name){
-        return  null;   //TODO implement, Future Dave
+        return  this.messageService.getMessagesBySenderName(name);
     }
 
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     @GetMapping("/teapot")
     public Object teaPot() {
-        return null;
+        return "I'm a wee teapot";
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Message addMessage(@RequestBody Message message) {
+        return null; //TODO
     }
 }

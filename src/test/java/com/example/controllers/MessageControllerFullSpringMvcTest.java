@@ -31,6 +31,7 @@ class MessageControllerFullSpringMvcTest {
 
     ObjectMapper mapper = new ObjectMapper();
 
+    @SuppressWarnings("CommentedOutCode")
     @Test
     void testGetAllMessages() throws Exception {
         ArrayList<Message> messages = TestUtilities.getMessageList();
@@ -42,7 +43,7 @@ class MessageControllerFullSpringMvcTest {
         //  Browser looks like .accept("text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
 
         // We can do checks on the ResultActions object and return the results in one go
-        MvcResult result = mockMvc.perform(requestBuilder)
+        @SuppressWarnings("unused") MvcResult result = mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(expectedJson))     // resultActions.andExpect(content().string("[{\"id\":null,\"content\":\"message1\"},{\"id\":null,\"content\":\"message2\"}]"));
@@ -63,7 +64,7 @@ class MessageControllerFullSpringMvcTest {
         Message message = new Message("Howdy, I'm message 1");
         when(mockMessageService.getMessageById(messageId)).thenReturn(message);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/messages/" + messageId);
-        MvcResult result = mockMvc.perform(requestBuilder)
+        mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -76,7 +77,7 @@ class MessageControllerFullSpringMvcTest {
 
         MockHttpServletRequestBuilder requestBuilder =
                 MockMvcRequestBuilders.get("/messages/" + messageId);
-        MvcResult result = mockMvc.perform(requestBuilder)
+        mockMvc.perform(requestBuilder)
                 .andExpect(status().isNotFound())
                 .andReturn();
     }

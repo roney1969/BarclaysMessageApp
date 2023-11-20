@@ -2,9 +2,7 @@ package com.example.services;
 
 import com.example.dataaccess.PersonRepository;
 import com.example.entities.Person;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
