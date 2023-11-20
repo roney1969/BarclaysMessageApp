@@ -1,9 +1,7 @@
 package com.example.integrationtests;
 
 import com.example.entities.Message;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,8 +13,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.io.UnsupportedEncodingException;
 
 import static com.example.TestConstants.EXPECTED_JSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,8 +31,6 @@ public class MessageWithMockHttpRequestIT {
     private final ObjectMapper mapper = new ObjectMapper();
     @Autowired
     MockMvc mockMvc;
-
-    ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     public void testGettingAllMessages() throws Exception {

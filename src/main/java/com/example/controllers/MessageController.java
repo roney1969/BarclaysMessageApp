@@ -1,7 +1,6 @@
 package com.example.controllers;
 
 import com.example.entities.Message;
-import com.example.entities.Person;
 import com.example.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

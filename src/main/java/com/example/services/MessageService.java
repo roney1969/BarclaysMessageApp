@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class MessageService {
 
-    public static final String BAD_SENDER_ID = "The sender id provided for a create/post must be null or zero or an existing user..";
+    public static final String SENDER_MUST_EXIST = "The sender of the message must already exist.";
     MessageRepository messageRepository;
     PersonRepository personRepository;
 
@@ -42,19 +42,21 @@ public class MessageService {
     }
 
     public Message addMessage(Message message) {
+        // If the user provided an ID for the message
         if(message.getId() != null && message.getId() != 0)
             throw  new IllegalArgumentException("The message id provided for a create/post must be null or zero.");
 
-        updateSender(message);
+        Person sender = message.getSender();
+
+        // If the sender doesn't already exist
+        if(sender.getId() == null)
+            throw new IllegalArgumentException(SENDER_MUST_EXIST);
+
+        // If the user provided a valid integer for ID, but it's not in the database
+        if(!this.personRepository.existsById(sender.getId()))
+            throw new IllegalArgumentException(SENDER_MUST_EXIST);
+
         return this.messageRepository.save(message);
     }
 
-    void updateSender(Message message) {
-        if(message.getSender().getId() != null && message.getSender().getId() != 0) {
-            if (!this.personRepository.existsById(message.getSender().getId()))
-                throw new IllegalArgumentException(BAD_SENDER_ID);
-        }
-        else
-            this.personRepository.save(message.getSender());
-    }
 }

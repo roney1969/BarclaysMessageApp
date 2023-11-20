@@ -11,12 +11,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 
 import static org.mockito.Mockito.*;
 
@@ -48,12 +46,9 @@ class PersonControllerFullSpringMvcTest {
                 .accept(MediaType.APPLICATION_JSON);
         ResultActions resultActions = mockMvc.perform(request);
 
-        MvcResult result = resultActions.andExpect(MockMvcResultMatchers.status().isCreated())
+        resultActions.andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
-
-        Person resultPerson = mapper.readValue(contentAsString, Person.class);
 
         verify(mockPersonService, times(1)).addPerson(any(Person.class));
     }
@@ -71,12 +66,9 @@ class PersonControllerFullSpringMvcTest {
                 .accept(MediaType.APPLICATION_JSON);
         ResultActions resultActions = mockMvc.perform(request);
 
-        MvcResult result = resultActions.andExpect(MockMvcResultMatchers.status().isCreated())
+        resultActions.andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
-
-        Person resultPerson = mapper.readValue(contentAsString, Person.class);
 
         verify(mockPersonService, times(1)).addPerson(any(Person.class));
     }
@@ -92,7 +84,7 @@ class PersonControllerFullSpringMvcTest {
                 .accept(MediaType.APPLICATION_JSON);
         ResultActions resultActions = mockMvc.perform(request);
 
-        MvcResult result = resultActions
+        resultActions
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andReturn();
 
