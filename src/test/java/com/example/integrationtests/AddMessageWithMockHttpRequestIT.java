@@ -47,6 +47,7 @@ public class AddMessageWithMockHttpRequestIT {
         if(existingPerson == null)
             existingPerson = new Person("Existing Person", "iexist@universe.com");
 
+        // Ensure this Person object has an ID
         if(existingPerson.getId() == null)
             this.personRepository.save(existingPerson);
 
@@ -97,8 +98,31 @@ public class AddMessageWithMockHttpRequestIT {
                 .andReturn();
     }
 
+
     @Test
-    void testAddMessageWithNoMessageId() throws Exception {
+    void testAddMessageWithNoSenderId() throws Exception {
+        String json =
+                """
+                {
+                  "id": %d,
+                  "sender": {
+                    "name": "%s",
+                    "email": "%s"
+                  },
+                  "content": "Josh's first message."
+                }""".formatted(0, existingPerson.getName(), existingPerson.getEmail());
+
+        Message expectedMessage = this.objectMapper.readValue(json, Message.class);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/messages")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+    }
+
+    @Test
+    void testAddMessageHappyPathWithNoMessageId() throws Exception {
         String json =
                 """
                 {
@@ -119,6 +143,7 @@ public class AddMessageWithMockHttpRequestIT {
                         .andExpect(status().isCreated())
                         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                         .andReturn();
+
         checkMessageFields(result, expectedMessage);
     }
 

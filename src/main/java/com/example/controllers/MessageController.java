@@ -50,9 +50,7 @@ public class MessageController {
 
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     @GetMapping("/teapot")
-    public Object teaPot() {
-        return "I'm a wee teapot";
-    }
+    public Object teaPot() {return "I'm a wee teapot";}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -64,6 +62,7 @@ public class MessageController {
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+
         return newMessage;
     }
 }
