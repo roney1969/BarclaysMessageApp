@@ -3,6 +3,7 @@ package com.example.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 
 
 @SuppressWarnings("unused")
@@ -10,7 +11,8 @@ import jakarta.persistence.Id;
 public class Person {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "person_sequence")
+    @SequenceGenerator(name="person_sequence", initialValue = 1)
     private Long id;
     public Long getId() {return id;}
 

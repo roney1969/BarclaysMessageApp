@@ -44,13 +44,20 @@ public class MessageService {
 
     public Message addMessage(Message message) {
         // If the user provided an ID for the message
+        if(message.getId() != null && message.getId() != 0)
+            throw new IllegalArgumentException(MESSAGE_ID_MUST_BE_NULL_OR_0);
 
-        // If the sender doesn't already exist
+        Person sender = message.getSender();
+
+        // If the sender ID isn't set to a valid number
+        if(sender.getId() == null)
+            throw new IllegalArgumentException(SENDER_MUST_EXIST);
 
         // If the user provided a valid integer for ID, but it's not in the database
+        if(!this.personRepository.existsById(sender.getId()))
+            throw new IllegalArgumentException(SENDER_MUST_EXIST);
 
         // If we've gotten here, it's safe to attempt to save the message
         return this.messageRepository.save(message);
     }
-
 }

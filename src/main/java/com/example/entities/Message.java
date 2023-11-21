@@ -1,16 +1,14 @@
 package com.example.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @SuppressWarnings("unused")
 @Entity
 public class Message {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "message_sequence")
+    @SequenceGenerator(name="message_sequence", initialValue = 1)
     private Long id;
 
     @ManyToOne

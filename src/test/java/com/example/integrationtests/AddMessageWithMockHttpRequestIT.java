@@ -51,8 +51,11 @@ public class AddMessageWithMockHttpRequestIT {
         if(existingPerson.getId() == null)
             this.personRepository.save(existingPerson);
 
+        Assertions.assertNotNull(this.existingPerson.getId());
+
         // Will not have an ID
         newPerson = new Person("New Person", "noob@noob.com");
+        Assertions.assertNull(newPerson.getId());
     }
 
     static final String NEW_MESSAGE_CONTENT = "This is the content of a new message";
@@ -97,7 +100,6 @@ public class AddMessageWithMockHttpRequestIT {
                 .andExpect(status().isBadRequest())
                 .andReturn();
     }
-
 
     @Test
     void testAddMessageWithNoSenderId() throws Exception {
@@ -151,10 +153,12 @@ public class AddMessageWithMockHttpRequestIT {
         String resultJson = result.getResponse().getContentAsString();
         Message resultMessage = this.objectMapper.readValue(resultJson, Message.class);
 
+        // Ensure data fields match expected values
         assertEquals(expectedMessage.getSender().getName(), resultMessage.getSender().getName());
         assertEquals(expectedMessage.getSender().getEmail(), resultMessage.getSender().getEmail());
         assertEquals(expectedMessage.getContent(), resultMessage.getContent());
 
+        // Ensure IDs have been set for both entities
         Assertions.assertNotNull(resultMessage.getId());
         Assertions.assertTrue(resultMessage.getId() > 0);
 
