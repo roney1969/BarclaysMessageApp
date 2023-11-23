@@ -37,7 +37,7 @@ pipeline {
 //          }
         stage('Deploy') {
             steps {
-                echo "[INFO] DEPLOYMENT SUCCESS"
+                echo "[INFO] DEPLOYMENT SUCCESS!!!"
                 //sh './jenkins/scripts/deploy.sh'
             }
         }
