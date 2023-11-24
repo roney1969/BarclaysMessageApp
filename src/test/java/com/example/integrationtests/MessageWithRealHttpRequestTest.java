@@ -40,6 +40,8 @@ public class MessageWithRealHttpRequestTest {
         HttpUriRequest request = new HttpGet("http://localhost:8080/messages/" + messageId);
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
-        System.out.println(messageId);
+        Message message = mapper.readValue(response.getEntity().getContent(), Message.class);
+
+        assertEquals("First test message", message.getContent());
     }
 }

@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(properties = {"spring.sql.init.mode=never"})
-public class AddMessageWithMockHttpRequestIT {
+class AddMessageWithMockHttpRequestIT {
 
     @Autowired
     MockMvc mockMvc;

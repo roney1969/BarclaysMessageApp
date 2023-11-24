@@ -11,7 +11,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-public class MessageControllerSomeSpringTest {
+class MessageControllerSomeSpringTest {
 
     @Autowired
     MessageController messageController;
@@ -20,7 +20,7 @@ public class MessageControllerSomeSpringTest {
     MessageService mockMessageService;
 
     @Test
-    public void getObjectsFromContextAndTestBehavior() {
+    void getObjectsFromContextAndTestBehavior() {
         Iterable<Message> messages = messageController.getAllMessages();
 
         verify(mockMessageService, times(1)).findAll();
