@@ -34,7 +34,7 @@ public class MessageWithRealHttpRequestTest {
     }
 
     @Test
-    @Disabled
+    @Disabled("Must be run while application is running.")
     void testGetMessageById() throws IOException {
         Long messageId = 1L;
         HttpUriRequest request = new HttpGet("http://localhost:8080/messages/" + messageId);
