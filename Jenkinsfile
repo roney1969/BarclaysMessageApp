@@ -36,6 +36,16 @@ pipeline {
               }
             }
           }
+        stage ('OWASP Dependency-Check Vulnerabilities') {
+            steps {
+              dependencyCheck additionalArguments: '''
+                  -o "./"
+                  -s "./"
+                  -f "ALL"
+                  --prettyPrint''', odcInstallation: 'dependency-check'
+              dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+          }
+        }
         stage('Deploy') {
             steps {
                 echo "[INFO] DEPLOYMENT SUCCESS!!!"
