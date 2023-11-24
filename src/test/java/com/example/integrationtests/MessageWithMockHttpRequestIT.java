@@ -33,7 +33,7 @@ class MessageWithMockHttpRequestIT {
     MockMvc mockMvc;
 
     @Test
-    public void testGettingAllMessages() throws Exception {
+    void testGettingAllMessages() throws Exception {
 
         MvcResult result =
                 (this.mockMvc.perform(MockMvcRequestBuilders.get("/messages")))
@@ -53,7 +53,7 @@ class MessageWithMockHttpRequestIT {
     }
 
     @Test
-    public void testFindMessagesBySenderEmail() throws Exception {
+    void testFindMessagesBySenderEmail() throws Exception {
         String senderEmail = "bill@iscooler.com";
         MvcResult result =
                 this.mockMvc.perform(MockMvcRequestBuilders.get("/messages/sender/email/" + senderEmail))

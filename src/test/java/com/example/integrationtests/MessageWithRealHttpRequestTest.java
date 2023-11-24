@@ -21,7 +21,7 @@ public class MessageWithRealHttpRequestTest {
 
     @Disabled("Must be run while application is running.")
     @Test
-    public void testGettingAllMessages() throws IOException {
+    void testGettingAllMessages() throws IOException {
         HttpUriRequest request = new HttpGet("http://localhost:8080/messages");
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
@@ -35,7 +35,7 @@ public class MessageWithRealHttpRequestTest {
 
     @Test
     @Disabled
-    public void testGetMessageById() throws IOException {
+    void testGetMessageById() throws IOException {
         Long messageId = 1L;
         HttpUriRequest request = new HttpGet("http://localhost:8080/messages/" + messageId);
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
